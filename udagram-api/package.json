@@ -22,14 +22,14 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "email-validator": "^2.0.4",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^4.44.4",
-    "sequelize-typescript": "^0.6.9",
-    "dotenv": "16.0.3"
+    "sequelize-typescript": "^0.6.9"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
