@@ -26,7 +26,7 @@ jobs:
             docker tag udagram-api-user kehindeafusat/udagram-api-user
             docker tag udagram-frontend kehindeafusat/udagram-frontend
             docker tag reverseproxy kehindeafusat/udagram-reverseproxy
-            echo $DOCKER_PASSWORD | winpty docker login -u kehindeafusat --password-stdin
+            echo $DOCKER_PASSWORD | docker login -u kehindeafusat --password-stdin
             docker push kehindeafusat/udagram-api-feed
             docker push kehindeafusat/udagram-api-user
             docker push kehindeafusat/udagram-frontend
