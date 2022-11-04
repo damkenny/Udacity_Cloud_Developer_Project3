@@ -1,0 +1,38 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context: udagram
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:14.15.5
+        auth:
+         username: $DOCKERHUB_USERNAME
+         password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - run:
+          name: Build, Tag and Push Docker images to Docker Hub
+          command: |
+            docker-compose -f docker-compose-build.yaml build --parallel
+            docker tag udagram-api-feed kehindeafusat/udagram-api-feed:latest
+            docker tag udagram-api-user kehindeafusat/udagram-api-user:latest
+            docker tag udagram-frontend kehindeafusat/udagram-frontend:local
+            docker tag udagram-reverseproxy kehindeafusat/udagram-reverseproxy:latest
+            echo $DOCKER_PASSWORD | docker login -u kehindeafusat --password-stdin
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            
+            docker push kehindeafusat/udagram-api-feed:latest
+            docker push kehindeafusat/udagram-api-user:latest
+            docker push kehindeafusat/udagram-frontend:local
+            docker push kehindeafusat/udagram-reverseproxy:latest
