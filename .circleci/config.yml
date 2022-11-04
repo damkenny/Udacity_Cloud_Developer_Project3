@@ -13,6 +13,9 @@ jobs:
   build:
     docker:
       - image: cimg/node:14.15.5
+        auth:
+         username: $DOCKERHUB_USERNAME
+         password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -27,7 +30,9 @@ jobs:
             docker tag udagram-frontend kehindeafusat/udagram-frontend:local
             docker tag udagram-reverseproxy kehindeafusat/udagram-reverseproxy:latest
             echo $DOCKER_PASSWORD | docker login -u kehindeafusat --password-stdin
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            
             docker push kehindeafusat/udagram-api-feed:v4a
             docker push kehindeafusat/udagram-api-user:v4a
             docker push kehindeafusat/udagram-frontend:local
-            docker push kehindeafusat/udagram-reverseproxy:latest
+            docker push kehindeafusat/udagram-reverseproxy:v5a
