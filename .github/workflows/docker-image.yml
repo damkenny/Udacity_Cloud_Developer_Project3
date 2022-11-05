@@ -1,0 +1,35 @@
+name: to build and push docker image to dockerhub
+on: [push] # When pushing to any branch then run this action
+# Env variable
+env:
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}  
+  FEED_API_REPO: ${{secrets.FEED_API_REPO}}
+  USER_API_REPO: ${{secrets. USER_API_REPO}}
+  FRONTEND_REPO: ${{secrets.FRONTEND_REPO}}
+  REVERSEPROXY_REPO: ${{secrets.REVERSEPROXY_REPO}}
+jobs:
+  push-image-to-docker-hub:  # job name
+    runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
+    steps:
+    - uses: actions/checkout@v2 # first action : checkout source code
+    - name: docker login
+      run: | # log into docker hub account
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
+    - name: Get current date # get the date of the build
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
+    - name: Build the udagram-api-user Docker image # push The image to the docker hub
+      run: docker build ./udagram-api-user --tag $DOCKER_USER/$USER_API_REPO #:${{ steps.date.outputs.date }}
+    - name: Build the udagram-api-feed Docker image # 
+      run: docker build ./udagram-api-feed --tag $DOCKER_USER/$FEED_API_REPO #:${{ steps.date.outputs.date }}
+    - name: Build the udagram-frontend Docker image # push The image to the docker hub
+      run: docker build ./udagram-frontend --tag $DOCKER_USER/$FRONTEND_REPO #:${{ steps.date.outputs.date }}
+    - name: Build the udagram-reverseproxy Docker image # push The image to the docker hub
+      run: docker build ./udagram-reverseproxy --tag $DOCKER_USER/$REVERSEPROXY_REPO #:${{ steps.date.outputs.date }}
+    - name: Docker Push all images to docker hub #
+      run: |
+       docker push $DOCKER_USER/$USER_API_REPO  
+       docker push $DOCKER_USER/$FEED_API_REPO
+       docker push $DOCKER_USER/$FRONTEND_REPO
+       docker push $DOCKER_USER/$REVERSEPROXY_REPO 
