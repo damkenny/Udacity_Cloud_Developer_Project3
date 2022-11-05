@@ -18,13 +18,13 @@
                   docker tag udagram-api-user ${DOCKERHUB_USERNAME}/udagram-api-user:v4a
                   docker tag udagram-api-feed ${DOCKERHUB_USERNAME}/udagram-api-feed:v4a
                   docker tag udagram-frontend:local ${DOCKERHUB_USERNAME}/udagram-frontend:local
-                  docker tag reverseproxy ${DOCKERHUB_USERNAME}/reverseproxy:v4a
+                  docker tag reverseproxy ${DOCKERHUB_USERNAME}/udagram-reverseproxy:v4a
 
                   echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
                   docker push ${DOCKERHUB_USERNAME}/udagram-api-user:v4a
                   docker push ${DOCKERHUB_USERNAME}/udagram-api-feed:v4a
                   docker push ${DOCKERHUB_USERNAME}/udagram-frontend:local
-                  docker push ${DOCKERHUB_USERNAME}/reverseproxy:v4a
+                  docker push ${DOCKERHUB_USERNAME}/udagram-reverseproxy:v4a
   
 
 
