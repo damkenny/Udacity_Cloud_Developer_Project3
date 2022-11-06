@@ -15,17 +15,17 @@
           - run: |
                   docker-compose -f docker-compose-build.yaml build --parallel
                   
-                  docker tag udagram-api-user ${DOCKERHUB_USERNAME}/udagram-api-user
-                  docker tag udagram-api-feed ${DOCKERHUB_USERNAME}/udagram-api-feed
-                  docker tag udagram-frontend:local ${DOCKERHUB_USERNAME}/udagram-frontend
-                  docker tag udagram-reverseproxy ${DOCKERHUB_USERNAME}/udagram-reverseproxy
+                  docker tag udagram-api-user ${DOCKERHUB_USERNAME}/udagram-api-user:v1
+                  docker tag udagram-api-feed ${DOCKERHUB_USERNAME}/udagram-api-feed:v1
+                  docker tag udagram-frontend:local ${DOCKERHUB_USERNAME}/udagram-frontend:v1
+                  docker tag udagram-reverseproxy ${DOCKERHUB_USERNAME}/udagram-reverseproxy:v1
 
                   echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
                 
-                  docker push ${DOCKERHUB_USERNAME}/udagram-api-user
-                  docker push ${DOCKERHUB_USERNAME}/udagram-api-feed
-                  docker push ${DOCKERHUB_USERNAME}/udagram-frontend
-                  docker push ${DOCKERHUB_USERNAME}/udagram-reverseproxy
+                  docker push ${DOCKERHUB_USERNAME}/udagram-api-user:v1
+                  docker push ${DOCKERHUB_USERNAME}/udagram-api-feed:v1
+                  docker push ${DOCKERHUB_USERNAME}/udagram-frontend:v1
+                  docker push ${DOCKERHUB_USERNAME}/udagram-reverseproxy:v1
   
 
 
