@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-configmap
+data:
+  # property-like keys; each key maps to a simple value
+  POSTGRES_HOST: "kennydbi.csloe8eukorb.us-east-1.rds.amazonaws.com"
+  POSTGRES_DB: "postgres"
+  AWS_BUCKET: "aws-785532077116"
+  AWS_REGION: "us-east-1"
+  AWS_PROFILE: "default"
+  JWT_SECRET: "hello"
+  URL: "http://a8ee947ae31404effa042803011c0c53-403677787.us-east-1.elb.amazonaws.com:80"
+
